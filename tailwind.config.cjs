@@ -4,9 +4,6 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
-      fontFamily: {
-        sans: ["Jost", "ui-sans-serif", "system-ui"],
-      },
       colors: {
         primary: "#EEE7DA",
         secondary: "#88AB8E",

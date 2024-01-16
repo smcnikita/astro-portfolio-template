@@ -2,6 +2,7 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '@/styles/global.css';
+import { AstroFont } from "astro-font";
 
 interface Props {
 	title: string;
@@ -21,9 +22,19 @@ const { title, description, image } = Astro.props;
 <meta name="generator" content={Astro.generator} />
 
 <!-- Font preloads -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<AstroFont
+	config={[
+	  {
+		src: [],
+		name: "Jost",
+		preload: false,
+		display: "swap",
+		fallback: "sans-serif",
+		selector: ".font-custom",
+		googleFontsURL: 'https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap',
+	  },
+	]}
+/>
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
