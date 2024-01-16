@@ -1,0 +1,47 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import BaseTitle from '@/components/BaseTitle.astro';
+import moment from 'moment';
+
+import type {CollectionEntry} from 'astro:content';
+
+type Props = CollectionEntry<'blog'>['data']
+
+const {title, description, pubDate, updatedDate, heroImage, tags} = Astro.props as Props;
+---
+
+<BaseLayout title={title} description={description ? description : title} image={heroImage}>
+	<article>
+		<div class="mb-3 flex justify-center">
+			{heroImage && <img width={960} height={480} src={heroImage} alt={title} class="shadow rounded"/>}
+		</div>
+
+		<div class="mb-4">
+			<div class="flex flex-col mb-3">
+				{moment(pubDate).format('DD.MM.YYYY')}
+				{
+					updatedDate && (
+						<small>
+							Last updated on {moment(updatedDate).format('DD.MM.YYYY')}
+						</small>
+					)
+				}
+			</div>
+
+			<BaseTitle>{title}</BaseTitle>
+
+			{tags &&
+				<div class="flex items-center flex-wrap gap-3">
+					{tags.map(tag => <small
+						class="px-2 py-1 rounded bg-dark text-primary dark:bg-primary dark:text-dark">{tag}</small>)}
+				</div>}
+		</div>
+
+		<hr/>
+
+		<div class="flex flex-col gap-3 mt-4 text-base">
+			<slot/>
+		</div>
+	</article>
+</BaseLayout>
+

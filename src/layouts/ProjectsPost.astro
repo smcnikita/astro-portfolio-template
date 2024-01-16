@@ -1,0 +1,29 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import BaseTitle from '@/components/BaseTitle.astro';
+
+import type {CollectionEntry} from 'astro:content';
+
+type Props = CollectionEntry<'projects'>['data'];
+
+const {heroImage, title} = Astro.props as Props;
+---
+
+<BaseLayout title={title} description={title} image={heroImage}>
+	<article>
+		<div class="mb-3 flex justify-center">
+			{heroImage && <img width={960} height={480} src={heroImage} alt={title} class="shadow rounded"/>}
+		</div>
+
+		<div class="mb-4">
+			<BaseTitle>{title}</BaseTitle>
+		</div>
+
+		<hr/>
+
+		<div class="flex flex-col gap-3 mt-4 text-base">
+			<slot/>
+		</div>
+	</article>
+</BaseLayout>
+

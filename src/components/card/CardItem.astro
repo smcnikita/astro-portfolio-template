@@ -1,0 +1,47 @@
+---
+import moment from 'moment';
+import type {CollectionEntry} from 'astro:content';
+
+type TDataItem = CollectionEntry<'blog'> | CollectionEntry<'projects'>;
+
+interface Props {
+	item: TDataItem;
+}
+
+const {item} = Astro.props;
+---
+
+<a href={`/${item.collection}/${item.slug}`}
+	 class="p-3 rounded border flex flex-col md:flex-row gap-3 hover:border-secondary transition-colors">
+	{item.data.heroImage && <img
+		src={item.data.heroImage}
+		class="max-w-full md:max-w-[250px] object-contain rounded shadow"
+		width="750"
+		height="422"
+		loading="lazy"
+		decoding="async"
+		alt={item.data.title}
+	>}
+
+
+	<div>
+		<h3 class:list={["font-medium text-lg", {
+			'mb-3': item.collection === 'projects',
+		}]}>
+			{item.data.title}
+			{item.data.badge && <small class="bg-secondary text-dark px-2 py-1 rounded ml-2">{item.data.badge}</small>}
+		</h3>
+
+		{item.collection === 'blog' && <small class="block mb-3">{moment(item.data.pubDate).format('DD.MM.YYYY')}</small>}
+
+		<p>{item.data.description}</p>
+
+		{
+			item.collection === 'blog' && item.data.tags &&
+			<div class="flex items-center flex-wrap gap-2 mt-3">
+				{item.data.tags.map(el => <small
+					class="px-2 py-1 rounded bg-dark text-primary dark:bg-primary dark:text-dark">{el}</small>)}
+			</div>
+		}
+	</div>
+</a>

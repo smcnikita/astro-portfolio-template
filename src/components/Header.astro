@@ -1,0 +1,22 @@
+---
+import HeaderLink from '@/components/HeaderLink.astro';
+import {SITE_TITLE} from '@/consts';
+---
+
+<header class="sticky top-0 bg-primary dark:bg-night">
+	<nav class="flex items-center gap-4 max-w-3xl mx-auto py-4 px-3">
+		<!-- logo -->
+		<h2 class="text-2xl font-bold">
+			<a href="/">{SITE_TITLE}</a>
+		</h2>
+
+		<!-- navigation -->
+		<ul class="flex items-center gap-3">
+			<HeaderLink href="/">Home</HeaderLink>
+			<li>/</li>
+			<HeaderLink href="/projects">Projects</HeaderLink>
+			<li>/</li>
+			<HeaderLink href="/blog">Blog</HeaderLink>
+		</ul>
+	</nav>
+</header>

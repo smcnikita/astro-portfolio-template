@@ -1,0 +1,40 @@
+---
+import BaseHead from '@/components/BaseHead.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import {SITE_TITLE} from '../consts';
+
+interface Props {
+	title: string;
+	description: string;
+	image?: string;
+}
+
+const {title, description, image = '/astro-portfolio-template.jpg'} = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+	<BaseHead title={title} description={description} image={image}/>
+</head>
+<body class="bg-light text-dark min-h-screen flex flex-col dark:text-white dark:bg-dark">
+<Header title={SITE_TITLE}/>
+
+<main class="flex-1 max-w-3xl mx-auto py-10 px-3">
+	<slot/>
+</main>
+
+<Footer/>
+</body>
+</html>
+
+<style>
+  :global(.dark) {
+    color-scheme: dark;
+  }
+
+	:global(.light) {
+    color-scheme: light;
+  }
+</style>

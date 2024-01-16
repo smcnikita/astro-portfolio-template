@@ -1,0 +1,37 @@
+---
+import type {TTheme} from '@/types/theme';
+
+interface Props {
+	key: TTheme;
+	isActive?: boolean;
+}
+
+const {key, isActive = false} = Astro.props;
+---
+
+<button id={`theme-${key}`} data-theme={key} type="button" class:list={["px-3 py-2 rounded text-dark dark:text-white hover:bg-secondary hover:text-dark transition-colors",
+	{
+		'bg-secondary': isActive,
+		'text-dark': isActive
+	}
+]}>
+	<slot/>
+</button>
+
+<style is:global>
+	.active {
+		@apply bg-secondary text-dark;
+	}
+</style>
+
+<script>
+	import { setTheme } from "@/utils/theme";
+	import type { TTheme } from "@/types/theme";
+
+	const buttons = document.querySelectorAll('button[data-theme]');
+
+	buttons.forEach(el => el.addEventListener('click', function handleClick(event) {
+		const target = event.target as HTMLButtonElement;
+		setTheme(target.dataset.theme as TTheme);
+	}));
+</script>

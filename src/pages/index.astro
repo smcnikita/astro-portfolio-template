@@ -1,0 +1,64 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import BaseTitle from '@/components/BaseTitle.astro';
+import BaseSubTitle from '@/components/BaseSubTitle.astro';
+import CardWrapper from '@/components/card/CardWrapper.astro'
+
+import {getCollection} from "astro:content";
+
+const projects = (await getCollection("projects")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const lastPosts = posts.slice(0, 3);
+const lastProjects = projects.slice(0, 3);
+---
+
+<BaseLayout title="Home" description="Home page">
+	<div class="mb-3">
+		<img src="/profile.webp" class="w-[200px] h-[200px] rounded-full object-cover" alt="Profile image">
+	</div>
+
+	<BaseTitle>
+		👋 Hi there, I'm <a class="text-secondary underline hover:opacity-70 transition-opacity"
+											 target="_blank" href="https://github.com/smcnikita" aria-label="smcnikita">
+		smcnikita
+	</a>
+	</BaseTitle>
+
+	<section class="flex flex-col gap-3 mb-4">
+		<p>
+			This is a free template for personal portfolio website with blog. Built with Astro and TailwindCSS.
+		</p>
+
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium amet at culpa cum cupiditate dignissimos
+			eligendi error expedita explicabo facere libero minima minus non quasi qui quis, quisquam, quo sint! Accusamus et
+			minus quisquam rem tempore voluptatum. Ab accusamus facere fuga illum mollitia, odit possimus quas rem sunt unde.
+			Accusamus aliquid beatae debitis ducimus eligendi minus modi possimus quod recusandae voluptatum! Beatae minima,
+			tempora. Aliquam at blanditiis commodi consequatur consequuntur corporis cumque delectus deleniti dolore ducimus
+			et eum expedita fugit libero magnam nihil nostrum odit officia optio placeat, quas quasi quis quisquam recusandae
+			similique ut vel veritatis vitae voluptatem voluptatibus? Aliquam beatae blanditiis dolorem dolores enim, harum
+			inventore minima nam quae quisquam quo rem rerum similique sint sunt tempore totam ut? Deserunt eius labore nihil
+			odit, pariatur perferendis quasi quisquam voluptatem? Ad asperiores, aut commodi, cupiditate doloribus error, id
+			ipsa minima molestiae nemo sapiente sed voluptatem? A ab ad alias asperiores aspernatur aut, dolorem eaque earum
+			et ex explicabo facilis fugit hic impedit iusto laboriosam molestiae mollitia nam nisi nobis non nulla odit
+			placeat quas quasi qui quia quod recusandae similique sunt temporibus veritatis vitae voluptas. A alias aspernatur
+			enim iusto necessitatibus nostrum ut vitae voluptatem. Dolorem nemo quos ratione!
+		</p>
+	</section>
+
+	<!-- projects -->
+	<section class="flex flex-col gap-3 mb-4">
+		<BaseSubTitle>My last projects</BaseSubTitle>
+		<a class="text-secondary hover:opacity-70 transition-opacity underline" href="/projects">All projects</a>
+		<CardWrapper items={lastProjects}/>
+	</section>
+
+	<!-- blog -->
+	<section class="flex flex-col gap-3">
+		<BaseSubTitle>Latest posts</BaseSubTitle>
+		<a class="text-secondary hover:opacity-70 transition-opacity underline" href="/blog">All posts</a>
+		<CardWrapper items={lastPosts}/>
+	</section>
+</BaseLayout>
+

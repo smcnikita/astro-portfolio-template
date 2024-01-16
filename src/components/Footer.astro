@@ -1,0 +1,37 @@
+---
+import FooterLink from '@/components/FooterLink.astro';
+import IconsWrapper from '@/components/icons/IconsWrapper.astro';
+import XComIcon from '@/components/icons/items/XComIcon.astro';
+import GithubIcon from '@/components/icons/items/GithubIcon.astro';
+import RssIcon from '@/components/icons/items/RssIcon.astro';
+import ThemeSwitcher from '@/components/theme/ThemeSwitcher.astro';
+
+const today = new Date();
+---
+
+<footer class="container mx-auto py-4 px-3 flex flex-col gap-3 items-center justify-center">
+	&copy; {today.getFullYear()} Astro Portfolio Template. All rights reserved.
+
+	<ThemeSwitcher/>
+
+	<div class="flex items-center gap-3">
+		<!-- github -->
+		<FooterLink href="https://github.com/smcnikita" title="Github" ariaLabel="Github">
+			<IconsWrapper classes="fill-dark hover:fill-secondary dark:fill-white transition-colors">
+				<GithubIcon/>
+			</IconsWrapper>
+		</FooterLink>
+		<!-- x -->
+		<FooterLink href="https://x.com/" title="X / Twitter" ariaLabel="X / Twitter">
+			<IconsWrapper classes="fill-dark hover:fill-secondary dark:fill-white transition-colors" viewBox="0 0 1227 1227">
+				<XComIcon/>
+			</IconsWrapper>
+		</FooterLink>
+		<!-- rss -->
+		<FooterLink href="/rss.xml" title="RSS Feed" ariaLabel="RSS Feed">
+			<IconsWrapper classes="fill-dark hover:fill-secondary dark:fill-white transition-colors" viewBox="0 0 512 512">
+				<RssIcon/>
+			</IconsWrapper>
+		</FooterLink>
+	</div>
+</footer>
