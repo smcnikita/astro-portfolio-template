@@ -6,6 +6,6 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "http://localhost:4321/",
+  site: "https://astro-portfolio-template-sage.vercel.app/",
   integrations: [mdx(), sitemap(), tailwind()],
 });
